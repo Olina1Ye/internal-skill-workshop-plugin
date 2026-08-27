@@ -1,0 +1,57 @@
+{
+  "name": "internal-skill-workshop",
+  "version": "0.1.0",
+  "description": "Browse a configured Skill Base catalog from DeepSeek Harness.",
+  "type": "module",
+  "main": "./index.js",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client/client.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "client",
+    "src",
+    "scripts",
+    "cordis.patch.yml",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "node scripts/build-client.mjs && node --check index.js && node --check client/client.js",
+    "test": "npm run build && node --test tests/plugin.test.cjs",
+    "prepack": "npm run build"
+  },
+  "keywords": [
+    "deepseek",
+    "harness",
+    "dsh",
+    "dsh-plugin",
+    "skill",
+    "skill-base"
+  ],
+  "author": "Olina1Ye",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Olina1Ye/internal-skill-workshop-plugin.git"
+  },
+  "homepage": "https://github.com/Olina1Ye/internal-skill-workshop-plugin#readme",
+  "engines": {
+    "node": ">=18"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-runtime",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-settings"
+      ]
+    }
+  }
+}
