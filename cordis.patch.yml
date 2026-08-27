@@ -1,0 +1,4 @@
+# Mount the Internal Skill Workshop package into the DSH profile layer.
+- insert:
+    - id: internal-skill-workshop
+      name: internal-skill-workshop
