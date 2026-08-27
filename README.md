@@ -14,8 +14,10 @@ The plugin does not upload local files, read Agent directories, store Skill Base
 ## Install
 
 ```sh
-dsh plugin --profile web add https://github.com/Olina1Ye/internal-skill-workshop-plugin/releases/download/v0.1.0/internal-skill-workshop-0.1.0.tgz
+dsh plugin --profile web add internal-skill-workshop
 ```
+
+The versioned [GitHub Release tarball](https://github.com/Olina1Ye/internal-skill-workshop-plugin/releases/tag/v0.1.0) is also available as a fallback install source.
 
 After restarting DSH Web, open Settings and select **Internal Skill Workshop**. Enter the Skill Base address, save it, and search the public catalog.
 
