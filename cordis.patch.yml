@@ -2,3 +2,4 @@
 - insert:
     - id: internal-skill-workshop
       name: internal-skill-workshop
+      config: {}
