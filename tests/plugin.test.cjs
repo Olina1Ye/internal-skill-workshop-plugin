@@ -27,6 +27,17 @@ test('declares an installable DSH bundle and web client', () => {
   assert.match(readFileSync(join(packageDir, 'cordis.patch.yml'), 'utf8'), /name:\s+internal-skill-workshop/);
 });
 
+test('documents post-install usage and keeps translation credentials server-side', () => {
+  const readme = readFileSync(join(packageDir, 'README.md'), 'utf8');
+
+  assert.match(readme, /dsh plugin --profile web add internal-skill-workshop/);
+  assert.match(readme, /Settings.*Internal Skill Workshop/s);
+  assert.match(readme, /does not require an API key/i);
+  assert.match(readme, /CLOUDFLARE_ACCOUNT_ID/);
+  assert.match(readme, /CLOUDFLARE_API_TOKEN/);
+  assert.match(readme, /server\s+process or container/i);
+});
+
 test('normalizes public and localhost Skill Base addresses', () => {
   assert.equal(client.normalizeBaseUrl('https://skills.example.com/'), 'https://skills.example.com');
   assert.equal(client.normalizeBaseUrl('http://localhost:8000/'), 'http://localhost:8000');
