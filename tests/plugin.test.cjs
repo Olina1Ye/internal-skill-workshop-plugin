@@ -23,6 +23,7 @@ test('declares an installable DSH bundle and web client', () => {
     '@deepseek-ai/dsh-client-runtime',
     '@deepseek-ai/dsh-client-locale',
     '@deepseek-ai/dsh-client-ui-settings',
+    '@deepseek-ai/dsh-client-connection',
   ]);
   assert.match(readFileSync(join(packageDir, 'cordis.patch.yml'), 'utf8'), /name:\s+internal-skill-workshop/);
 });
@@ -79,6 +80,9 @@ test('normalizes only the public skill fields rendered by the UI', () => {
     name: 'Writer',
     description: 'Writes copy.',
     latest_version: 'v20260826.120000',
+    installed_version: 'v20260825.120000',
+    installed: true,
+    visibility: 'private',
     skill_type: 'content-creation',
     compatible_tools: ['codex'],
     tags: [{ name: 'copywriting' }, '中文'],
@@ -89,6 +93,9 @@ test('normalizes only the public skill fields rendered by the UI', () => {
     name: 'Writer',
     description: 'Writes copy.',
     latestVersion: 'v20260826.120000',
+    installedVersion: 'v20260825.120000',
+    installed: true,
+    visibility: 'private',
     skillType: 'content-creation',
     compatibleTools: ['codex'],
     tags: ['copywriting', '中文'],
@@ -103,4 +110,7 @@ test('build output registers the client module with DSH', () => {
   assert.match(built, /window\.__ModuleLoader__\.load/);
   assert.match(built, /id: 'internal-skill-workshop'/);
   assert.match(built, /settings\.section/);
+  assert.match(built, /internal-skill-workshop.*catalog\/search/s);
+  assert.match(built, /internal-skill-workshop.*auth\/verify/s);
+  assert.match(built, /internal-skill-workshop.*install/s);
 });

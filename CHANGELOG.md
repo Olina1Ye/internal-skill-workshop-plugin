@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.0 - 2026-08-28
+
+- Add an administrator-provided default Skill Base address.
+- Add verification-code sign-in and private Skill browsing.
+- Keep Skill Base PATs on the loopback DSH host.
+- Add one-click installation into `$DSH_HOME/skills`.
+- Reject unsafe archives and existing destination directories.
+
 ## 0.1.0 - 2026-08-27
 
 - Publish a prebuilt GitHub Release tarball for DSH installation.

@@ -1,7 +1,7 @@
 {
   "name": "internal-skill-workshop",
-  "version": "0.1.0",
-  "description": "Browse a configured Skill Base catalog from DeepSeek Harness.",
+  "version": "0.2.0",
+  "description": "Browse, sign in to, and install Skills from a team Skill Base in DeepSeek Harness.",
   "type": "module",
   "main": "./index.js",
   "exports": {
@@ -20,7 +20,7 @@
   ],
   "scripts": {
     "build": "node scripts/build-client.mjs && node --check index.js && node --check client/client.js",
-    "test": "npm run build && node --test tests/plugin.test.cjs",
+    "test": "npm run build && node --test tests/*.test.*",
     "prepack": "npm run build"
   },
   "keywords": [
@@ -50,8 +50,13 @@
       "inject": [
         "@deepseek-ai/dsh-client-runtime",
         "@deepseek-ai/dsh-client-locale",
-        "@deepseek-ai/dsh-client-ui-settings"
+        "@deepseek-ai/dsh-client-ui-settings",
+        "@deepseek-ai/dsh-client-connection"
       ]
     }
+  },
+  "dependencies": {
+    "adm-zip": "^0.6.0",
+    "yaml": "^2.8.3"
   }
 }
