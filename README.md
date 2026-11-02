@@ -27,7 +27,9 @@ dsh plugin --profile web add team-skill-hub
 4. 如需访问私有技能，点击获取验证码，在 Skill Base 页面登录并生成验证码，再返回插件完成登录。
 5. 选择技能并点击安装，技能会保存到 `$DSH_HOME/skills/<skill-id>`，默认位于 `~/.dsh/skills/`。已存在的同名目录不会被覆盖。
 
-从旧包 `internal-skill-workshop` 迁移时，请先卸载旧插件，再安装新包，避免同时启用。原有服务地址和凭据使用原目录保存。当前主机连接仅支持本机回环访问；远程访问或反向代理部署不在当前支持范围内。
+从旧包 `internal-skill-workshop` 迁移时，请先卸载旧插件，再安装 `team-skill-hub`，避免同时启用。新插件会继续使用原有配置目录，保留已保存的服务地址和登录凭据。
+
+Skill Base 可以部署在云端，团队成员可使用同一个 HTTPS 服务地址。当前插件需在本机运行并通过本机地址访问 DSH Web，暂不支持远程访问 DSH Web 或通过反向代理访问 DSH Web。
 
 ### 项目与问题反馈
 

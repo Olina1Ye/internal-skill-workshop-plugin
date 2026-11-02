@@ -1,6 +1,6 @@
 {
   "name": "team-skill-hub",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Team Skill Hub: browse shared team skills and install them in DeepSeek Harness.",
   "type": "module",
   "main": "./index.js",
