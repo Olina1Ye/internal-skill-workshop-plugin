@@ -1,6 +1,6 @@
 {
   "name": "team-skill-hub",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Team Skill Hub: browse shared team skills and install them in DeepSeek Harness.",
   "type": "module",
   "main": "./index.js",
@@ -58,5 +58,8 @@
   "dependencies": {
     "adm-zip": "^0.6.0",
     "yaml": "^2.8.3"
+  },
+  "bugs": {
+    "url": "https://github.com/Olina1Ye/internal-skill-workshop-plugin/issues"
   }
 }

@@ -1,5 +1,44 @@
 # Team Skill Hub · 团队 Skill 中心
 
+
+团队 Skill 中心用于连接已有的 [Skill Base](https://github.com/ginuim/skill-base) 服务，在 DeepSeek Harness Web 中查找团队共享技能并一键安装。
+
+- 浏览公开技能；通过验证码登录后查看有权限访问的私有技能。
+- 查看技能作者、版本、适用工具和标签。
+- 管理员可以预设团队服务地址，成员也可以自行填写。
+
+当前插件的安装目标是 **DSH Web**；技能标注适用于 Codex、Claude 等工具，不代表本插件已经支持向这些工具安装技能。
+
+## 中文快速开始
+
+### 安装前准备
+
+你需要一个 DSH Web 能访问的 Skill Base 服务根地址，例如 `https://skills.company.example`。团队成员可以使用管理员提供的地址，无需每人单独启动服务；自己本地试用时，需要先启动自己的 Skill Base 服务。本插件不包含或部署 Skill Base 服务。
+
+### 安装与使用
+
+```sh
+dsh plugin --profile web add team-skill-hub
+```
+
+1. 重启 DSH Web，打开 **设置 → 团队 Skill 中心（Team Skill Hub）**。
+2. 填写并保存 Skill Base 网站根地址，不要添加 `/api` 后缀。远程地址需要 HTTPS，本机开发可使用回环 HTTP 地址。
+3. 搜索并浏览公开技能。
+4. 如需访问私有技能，点击获取验证码，在 Skill Base 页面登录并生成验证码，再返回插件完成登录。
+5. 选择技能并点击安装，技能会保存到 `$DSH_HOME/skills/<skill-id>`，默认位于 `~/.dsh/skills/`。已存在的同名目录不会被覆盖。
+
+从旧包 `internal-skill-workshop` 迁移时，请先卸载旧插件，再安装新包，避免同时启用。原有服务地址和凭据使用原目录保存。当前主机连接仅支持本机回环访问；远程访问或反向代理部署不在当前支持范围内。
+
+### 项目与问题反馈
+
+- [GitHub 源码与文档](https://github.com/Olina1Ye/internal-skill-workshop-plugin)
+- [npm 安装包](https://www.npmjs.com/package/team-skill-hub)
+- [报告问题或提出功能建议](https://github.com/Olina1Ye/internal-skill-workshop-plugin/issues)
+
+反馈时请注明 DSH 版本、插件版本、操作步骤、预期结果和实际报错。截图或日志中请隐藏验证码、访问令牌及其他敏感信息。
+
+以下为英文说明与技术细节。
+
 `team-skill-hub` is a DeepSeek Harness Web plugin for finding and
 installing team Skills from a configured
 [Skill Base](https://github.com/ginuim/skill-base) server.
