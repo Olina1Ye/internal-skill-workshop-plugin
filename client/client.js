@@ -11,8 +11,8 @@ window.__ModuleLoader__.load({
     const CHANNEL = '/internal-skill-workshop';
 
     const zh = {
-      nav: '内部 Skill 工作台',
-      heading: '内部 Skill 工作台',
+      nav: '团队 Skill 中心',
+      heading: '团队 Skill 中心',
       intro: '查找并安装团队发布的 Skill。',
       baseUrl: 'Skill Base 地址',
       baseUrlPlaceholder: 'https://skills.example.com',
@@ -62,8 +62,8 @@ window.__ModuleLoader__.load({
     };
 
     const en = {
-      nav: 'Internal Skill Workshop',
-      heading: 'Internal Skill Workshop',
+      nav: 'Team Skill Hub',
+      heading: 'Team Skill Hub',
       intro: 'Find and install Skills published by your team.',
       baseUrl: 'Skill Base address',
       baseUrlPlaceholder: 'https://skills.example.com',

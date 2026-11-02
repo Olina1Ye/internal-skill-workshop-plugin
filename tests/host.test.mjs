@@ -6,10 +6,16 @@ import test from 'node:test';
 import AdmZip from 'adm-zip';
 import {
   apply,
+  inject,
   createWorkshopService,
   installSkillArchive,
   normalizeBaseUrl,
 } from '../index.js';
+
+test('declares the services needed to register its host RPC', () => {
+  assert.ok(inject.includes('connection'));
+  assert.ok(inject.includes('webServer'));
+});
 
 function temporaryHome() {
   return fs.mkdtempSync(path.join(os.tmpdir(), 'internal-skill-workshop-'));
@@ -226,14 +232,32 @@ test('safe install refuses traversal, mismatched roots, and existing destination
 test('plugin registers a loopback-only host RPC channel', () => {
   const registered = [];
   apply({
-    get: () => ({
+    webServer: { host: '127.0.0.1' },
+    connection: {
+      allowsRemoteAuthorities: false,
       rpc: {
         handle(channel, handler, options) {
           registered.push({ channel, handler, options });
         },
       },
-    }),
+    },
   });
   assert.equal(registered[0].channel, '/internal-skill-workshop');
   assert.deepEqual(registered[0].options, { authority: 'loopback' });
+});
+
+test('does not expose the host RPC through remote deployments', () => {
+  let registered = false;
+  apply({ webServer: { host: '0.0.0.0' }, connection: { allowsRemoteAuthorities: false, rpc: { handle() { registered = true; } } } });
+  apply({ webServer: { host: '127.0.0.1' }, connection: { allowsRemoteAuthorities: true, rpc: { handle() { registered = true; } } } });
+  assert.equal(registered, false);
+});
+
+test('disposes the root-scoped RPC when the plugin unloads', () => {
+  let disposed = false;
+  let cleanup;
+  const connection = { allowsRemoteAuthorities: false, rpc: { handle: () => () => { disposed = true; } } };
+  apply({ connection, webServer: { host: '127.0.0.1' }, root: { get: () => connection }, effect: (callback) => { cleanup = callback(); } });
+  cleanup();
+  assert.equal(disposed, true);
 });

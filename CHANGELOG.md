@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.2.1 - 2026-11-02
+
+- Rename the npm package to `team-skill-hub` and the UI to Team Skill Hub / 团队 Skill 中心.
+- Preserve existing profile IDs and saved state for migration.
+
+- Fix plugin activation and host RPC registration on DSH 0.2.1-rc.5.
+- Disable host RPC for non-loopback and remote-authority deployments.
+- Clean up the registered RPC handler when the plugin unloads.
+
 ## 0.2.0 - 2026-08-28
 
 - Add an administrator-provided default Skill Base address.

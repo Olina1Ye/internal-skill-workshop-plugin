@@ -1,6 +1,6 @@
-# internal-skill-workshop
+# Team Skill Hub · 团队 Skill 中心
 
-`internal-skill-workshop` is a DeepSeek Harness Web plugin for finding and
+`team-skill-hub` is a DeepSeek Harness Web plugin for finding and
 installing team Skills from a configured
 [Skill Base](https://github.com/ginuim/skill-base) server.
 
@@ -22,10 +22,17 @@ You need a running Skill Base server that DSH Web can reach. The plugin is a
 team catalog client; it does not include or deploy the server.
 
 ```sh
-dsh plugin --profile web add internal-skill-workshop
+dsh plugin --profile web add team-skill-hub
 ```
 
-Restart DSH Web, then open **Settings -> Internal Skill Workshop**.
+Restart DSH Web, then open **Settings -> Team Skill Hub**.
+
+## Migration from internal-skill-workshop
+
+Remove the old plugin before installing `team-skill-hub`; do not enable both.
+The internal profile entry ID and `$DSH_HOME/internal-skill-workshop` state
+directory are retained so the saved server address and credentials are reused.
+The GitHub repository URL remains unchanged.
 
 ## Team setup
 
@@ -44,7 +51,7 @@ Remote servers must use HTTPS. Loopback HTTP is accepted for local development.
 
 ## Member workflow
 
-1. Open **Settings -> Internal Skill Workshop**.
+1. Open **Settings -> Team Skill Hub**.
 2. Confirm or enter the Skill Base root address without an `/api` suffix.
 3. Search immediately to browse public Skills.
 4. To see private Skills, choose **Get code**. Sign in on the Skill Base page
@@ -106,6 +113,8 @@ adding them to a host `.env` file alone may not do that.
 
 - The browser can call the plugin host only through a loopback-only DSH RPC
   channel.
+- The host RPC is disabled when DSH listens on a non-loopback address or
+  allows remote authorities, including reverse-proxy deployments.
 - The host validates the Skill Base URL and rejects remote HTTP, credentials,
   query strings, fragments, and redirects.
 - Downloaded archives are limited to 50 MB compressed, 100 MB unpacked, and

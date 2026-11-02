@@ -1,7 +1,7 @@
 {
-  "name": "internal-skill-workshop",
-  "version": "0.2.0",
-  "description": "Browse, sign in to, and install Skills from a team Skill Base in DeepSeek Harness.",
+  "name": "team-skill-hub",
+  "version": "0.2.1",
+  "description": "Team Skill Hub: browse shared team skills and install them in DeepSeek Harness.",
   "type": "module",
   "main": "./index.js",
   "exports": {

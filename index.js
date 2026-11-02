@@ -5,7 +5,7 @@ import AdmZip from 'adm-zip';
 import { parseDocument } from 'yaml';
 
 export const name = 'internal-skill-workshop';
-export const inject = ['connection'];
+export const inject = ['connection', 'webServer'];
 
 const CHANNEL = '/internal-skill-workshop';
 const MAX_ARCHIVE_BYTES = 50 * 1024 * 1024;
@@ -84,7 +84,7 @@ function writeJsonAtomically(filePath, value) {
 function rpcFailure(error) {
   const message = error instanceof WorkshopError
     ? error.message
-    : 'Internal Skill Workshop could not complete the request.';
+    : 'Team Skill Hub could not complete the request.';
   return { ok: false, error: { code: 'internal', message, details: {} } };
 }
 
@@ -483,7 +483,7 @@ export function createWorkshopService(config = {}, options = {}) {
     publicState,
     async handle(endpoint, payload, signal) {
       const handler = handlers[endpoint];
-      if (!handler) return rpcFailure(new WorkshopError('Unknown Internal Skill Workshop operation.'));
+      if (!handler) return rpcFailure(new WorkshopError('Unknown Team Skill Hub operation.'));
       try {
         return { ok: true, value: await handler(payload, signal) };
       } catch (error) {
@@ -494,12 +494,15 @@ export function createWorkshopService(config = {}, options = {}) {
 }
 
 export function apply(ctx, config = {}) {
-  const connection = typeof ctx.get === 'function' ? ctx.get('connection') : ctx.connection;
+  const connection = ctx.connection;
   if (!connection?.rpc) return;
+  if (!['localhost', '127.0.0.1', '::1', '[::1]'].includes(ctx.webServer?.host) || connection.allowsRemoteAuthorities) return;
   const service = createWorkshopService(config);
-  connection.rpc.handle(
+  const rpc = ctx.root ? ctx.root.get('connection').rpc : connection.rpc;
+  const dispose = rpc.handle(
     CHANNEL,
     (endpoint, payload, signal) => service.handle(endpoint, payload, signal),
     { authority: 'loopback' },
   );
+  if (ctx.root) ctx.effect(() => dispose);
 }

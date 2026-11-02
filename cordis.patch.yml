@@ -1,5 +1,5 @@
-# Mount the Internal Skill Workshop package into the DSH profile layer.
+# Mount the Team Skill Hub package into the DSH profile layer.
 - insert:
     - id: internal-skill-workshop
-      name: internal-skill-workshop
+      name: team-skill-hub
       config: {}

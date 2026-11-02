@@ -8,7 +8,7 @@ const manifest = require(join(packageDir, 'package.json'));
 const client = require(join(packageDir, 'src/client/index.cjs'));
 
 test('declares an installable DSH bundle and web client', () => {
-  assert.equal(manifest.name, 'internal-skill-workshop');
+  assert.equal(manifest.name, 'team-skill-hub');
   assert.equal(
     manifest.repository.url,
     'git+https://github.com/Olina1Ye/internal-skill-workshop-plugin.git',
@@ -25,14 +25,14 @@ test('declares an installable DSH bundle and web client', () => {
     '@deepseek-ai/dsh-client-ui-settings',
     '@deepseek-ai/dsh-client-connection',
   ]);
-  assert.match(readFileSync(join(packageDir, 'cordis.patch.yml'), 'utf8'), /name:\s+internal-skill-workshop/);
+  assert.match(readFileSync(join(packageDir, 'cordis.patch.yml'), 'utf8'), /name:\s+team-skill-hub/);
 });
 
 test('documents post-install usage and keeps translation credentials server-side', () => {
   const readme = readFileSync(join(packageDir, 'README.md'), 'utf8');
 
-  assert.match(readme, /dsh plugin --profile web add internal-skill-workshop/);
-  assert.match(readme, /Settings.*Internal Skill Workshop/s);
+  assert.match(readme, /dsh plugin --profile web add team-skill-hub/);
+  assert.match(readme, /Settings.*Team Skill Hub/s);
   assert.match(readme, /does not require an API key/i);
   assert.match(readme, /CLOUDFLARE_ACCOUNT_ID/);
   assert.match(readme, /CLOUDFLARE_API_TOKEN/);
